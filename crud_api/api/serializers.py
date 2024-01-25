@@ -17,3 +17,10 @@ class StudentSerializer(serializers.Serializer):
         instance.city=validated_data.get('city',instance.city)
         instance.save()
         return instance
+    
+
+    # this is automaically called when is_valid of the serializer class is called
+    def validate_roll(self,value):
+        if value>=200:
+            raise serializers.ValidationError('Seat Full')
+        return value
